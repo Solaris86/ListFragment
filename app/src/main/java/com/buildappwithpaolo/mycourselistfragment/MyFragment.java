@@ -4,13 +4,30 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class MyFragment extends Fragment {
+import com.buildappwithpaolo.mycourselistfragment.data.Course;
+import com.buildappwithpaolo.mycourselistfragment.data.CourseArrayAdapter;
+import com.buildappwithpaolo.mycourselistfragment.data.CourseData;
+
+import java.util.List;
+
+public class MyFragment extends ListFragment {
+
+    List<Course> courses = new CourseData().courseList();
 
     public MyFragment() {
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        CourseArrayAdapter adapter = new CourseArrayAdapter(getActivity(), R.layout.course_list_item, courses);
+        setListAdapter(adapter);
     }
 
     @Nullable

@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.buildappwithpaolo.mycourselistfragment.data.Course;
+import com.buildappwithpaolo.mycourselistfragment.data.CourseData;
 
 public class CourseDetailFragment extends Fragment {
 
@@ -20,12 +21,23 @@ public class CourseDetailFragment extends Fragment {
 
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        Bundle bundle = getArguments();
+        if (bundle != null && bundle.containsKey("course_id")) {
+            int position = bundle.getInt("course_id");
+            course = new CourseData().courseList().get(position);
+        }
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.course_detail_fragment, container, false);
 
-        if (view != null) {
+        if (course != null) {
             TextView courseName = view.findViewById(R.id.detailCourseName);
             courseName.setText(course.getCourseName());
 

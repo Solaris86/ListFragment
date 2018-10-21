@@ -47,13 +47,13 @@ public class CourseListFragment extends ListFragment {
     }
 
     public interface Callbacks {
-        public void onItemSelected(Course course);
+        void onItemSelected(Course course, int position);
     }
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         Course course = courses.get(position);
-        this.activity.onItemSelected(course);
+        this.activity.onItemSelected(course, position);
     }
 
     @Override
